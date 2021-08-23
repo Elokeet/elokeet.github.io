@@ -18,11 +18,12 @@ function automate(){
 	};
 };
 
+
 function save(){
 	var save = {
-		numClicks = numClicks,
-		automatics = automatics,
-		autoCost = autoCost
+		numClicks: numClicks,
+		automatics: automatics,
+		autoCost: autoCost
 	};
 	localStorage.setItem("save",JSON.stringify(save));
 };
@@ -32,11 +33,14 @@ function load(){
 	if (typeof savegame.numClicks !== "undefined") numClicks = savegame.numClicks;
 	if (typeof savegame.automatics !== "undefined") automatics = savegame.automatics;
 	if (typeof savegame.autoCost !== "undefined") autoCost = savegame.autoCost;
-}
+	document.getElementById("clicks").innerHTML = numClicks;
+	document.getElementById("automatics").innerHTML = automatics;
+	document.getElementById("autoCost").innerHTML = autoCost;
+};
 
 function deleteSave(){
 	localStorage.removeItem("save");
-}
+};
 
 window.setInterval(function(){
 	clicked(automatics)
