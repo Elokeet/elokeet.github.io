@@ -18,6 +18,26 @@ function automate(){
 	};
 };
 
+function save(){
+	var save = {
+		numClicks = numClicks,
+		automatics = automatics,
+		autoCost = autoCost
+	};
+	localStorage.setItem("save",JSON.stringify(save));
+};
+
+function load(){
+	var savegame = JSON.parse(localStorage.getItem("save"));
+	if (typeof savegame.numClicks !== "undefined") numClicks = savegame.numClicks;
+	if (typeof savegame.automatics !== "undefined") automatics = savegame.automatics;
+	if (typeof savegame.autoCost !== "undefined") autoCost = savegame.autoCost;
+}
+
+function deleteSave(){
+	localStorage.removeItem("save");
+}
+
 window.setInterval(function(){
 	clicked(automatics)
 }, 1000);
