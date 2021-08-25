@@ -3,21 +3,33 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="interface.css" />
-	<title>Page Title</title>
+	<title>RNA World</title>
 </head>
 
 <body>
 
+<p id="state">You are a single nucleotide.</p>
+<p id="strandText" style="display:none">Your bases are <span id="strand"></spand>.</p>
+<!--<button type="button" onClick="clicked(1)">Replicate</button> -->
+<p id="copiesText" style="display:none">You have <span id="copies"></span> copies.</p>
+<p id="growthText" style="display:none"><button type="button" onClick="grow()">Grow</button> Requires <span id="growthCost">2</span> copies.</p>
+
+<!--
 <p>You have clicked <span id="clicks">0</span> times.</p>
 <button type="button" onClick="clicked(1)">Click</button>
 <button type="button" onClick="automate()">Automate</button>
 <br>
 Automatics: <span id="automatics">0</span>
 Cost: <span id="autoCost">2</span>
+-->
+
+<br>
 <br>
 <button type="button" onClick="save()">Save</button>
 <button type="button" onClick="load()">Load save</button>
 <button type="button" onClick="deleteSave()">Delete save</button>
+<br>
+<a href="changelog.html" target="_blank">Changelog</a>
 
 </body>
 
