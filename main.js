@@ -2,16 +2,24 @@ var copies = 1;
 var strand = "";
 var growthCost = 2;
 var copyRate = 1;
+var ribozymeCost = 3;
+var ribozymes = 0;
 
 var showCopiesText = false;
 var showStrandText = false;
+var showRibozymeText = false;
 
 function addBase(){
 	if (showStrandText == false) {
 		showStrandText = true;
 		document.getElementById("state").innerHTML = "You are a strand of RNA.";
 		document.getElementById("strandText").style.display="block";
-	}
+	};
+	if (strand.length == 2) {
+		showRibozymeText = true;
+		document.getElementById("ribozymeText").style.display="block";
+	};
+	
 	rand = Math.floor(Math.random() * 4);
 	if (rand == 0) {
 		strand += "C";
@@ -23,6 +31,18 @@ function addBase(){
 		strand += "U";
 	};
 	document.getElementById("strand").innerHTML = strand;
+};
+
+function addRibozyme() {
+	if (copies >= ribozymeCost) {
+		copies = copies - ribozymeCost;
+		copyRate = copyRate + 1;
+		ribozymes = ribozymes + 1;
+		ribozymeCost = ribozymeCost + 3;
+		document.getElementById("copies").innerHTML = copies;
+		document.getElementById("ribozymeCost").innerHTML = ribozymeCost;
+		document.getElementById("ribozymes").innerHTML = ribozymes;
+	};
 };
 
 function clicked(number){
@@ -51,8 +71,11 @@ function save(){
 		strand: strand,
 		growthCost: growthCost,
 		copyRate: copyRate,
+		ribozymeCost: ribozymeCost,
+		ribozymes: ribozymes,
 		showCopiesText: showCopiesText,
-		showStrandText: showStrandText
+		showStrandText: showStrandText,
+		showRibozymeText: showRibozymeText
 	};
 	localStorage.setItem("save",JSON.stringify(save));
 };
@@ -64,12 +87,17 @@ function load(){
 	if (typeof savegame.strand !== "undefined") strand = savegame.strand;
 	if (typeof savegame.growthCost !== "undefined") growthCost = savegame.growthCost;
 	if (typeof savegame.copyRate !== "undefined") copyRate = savegame.copyRate;
+	if (typeof savegame.ribozymeCost !== "undefined") ribozymeCost = savegame.ribozymeCost;
+	if (typeof savegame.ribozymes !== "undefined") ribozymes = savegame.ribozymes;
 	if (typeof savegame.showCopiesText !== "undefined") showCopiesText = savegame.showCopiesText;
 	if (typeof savegame.showStrandText !== "undefined") showStrandText = savegame.showStrandText;
+	if (typeof savegame.showRibozymeText !== "undefined") showRibozymeText = savegame.showRibozymeText;
 	
 	document.getElementById("copies").innerHTML = copies;
 	document.getElementById("strand").innerHTML = strand;
 	document.getElementById("growthCost").innerHTML = growthCost;
+	document.getElementById("ribozymeCost").innerHTML = ribozymeCost;
+	document.getElementById("ribozymes").innerHTML = ribozymes;
 	
 	if (showCopiesText == false) {
 		document.getElementById("copiesText").style.display="none";
@@ -84,6 +112,11 @@ function load(){
 	} else {
 		document.getElementById("strandText").style.display="block";
 		document.getElementById("state").innerHTML = "You are a strand of RNA.";
+	};
+	if (showRibozymeText == false) {
+		document.getElementById("ribozymeText").style.display="none";
+	} else {
+		document.getElementById("ribozymeText").style.display="block";
 	};
 	
 };
