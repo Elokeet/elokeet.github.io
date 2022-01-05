@@ -1,9 +1,97 @@
-var copies = 1;
+var i = 0;
+var n = 0;
+var seeds = 0;
+var pecking = false;
+var building = false;
+var seedWidth = 1
+var nestWidth = 1
+function startPecking(){
+	pecking = true;
+	building = false;
+	var elem = document.getElementById("seedBar");
+    var id = setInterval(frame, 20);
+    function frame() {
+	    if (pecking == false) {
+			clearInterval(id);
+		}
+		else if (seedWidth >= 100) {
+			seedWidth = 0;
+			elem.style.seedWidth = seedWidth + "%";
+			seeds += 1;
+			document.getElementById("seeds").innerHTML = seeds;
+		} else {
+			seedWidth++;
+			elem.style.width = seedWidth + "%";
+		}
+		document.getElementById("test").innerHTML = seedWidth;
+    }
+}
+function startBuilding(){
+	pecking = false;
+	building = true;
+	var elem = document.getElementById("nestBar");
+    var id = setInterval(frame, 80);
+    function frame() {
+	    if (building == false || nestWidth >= 100) {
+			clearInterval(id);
+		} else {
+			nestWidth++;
+			elem.style.width = nestWidth + "%";
+		}
+		document.getElementById("test").innerHTML = nestWidth;
+    }
+}
+function peckSeeds(interval) {
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("seedBar");
+    var width = 1;
+    var id = setInterval(frame, interval);
+    function frame() {
+      if (width >= 100 || pecking == false) {
+        clearInterval(id);
+        i = 0;
+		seeds += 1;
+		document.getElementById("seeds").innerHTML = seeds;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+      }
+    }
+  }
+}
+function buildNest(interval) {
+  if (n == 0) {
+    n = 1;
+    var elem = document.getElementById("nestBar");
+    var width = 1;
+    var id = setInterval(frame, interval);
+    function frame() {
+      if (width >= 100 || building == false) {
+        clearInterval(id);
+      } else {
+        width++;
+		elem.style.width = width + "%";
+      } 
+    }
+  }
+}
+window.setInterval(function(){
+	/*if (pecking) {
+		peckSeeds(20);
+	}
+	if (building) {
+		buildNest(80);
+	}*/
+}, 1000);
+
+/*var copies = 1;
 var strand = "";
 var growthCost = 2;
-var copyRate = 1;
+var copyRate = 0;
 var ribozymeCost = 3;
 var ribozymes = 0;
+const round18 = "GGAAAAAGACAAAUCUGCCCUCAGAGCUUGAGAACAUCUUCGGAUGCAGAGGAGGCAGCCUCCGGUGGCGCGAUAGCGCCAACGUUCUCAACAGGCGCCCAAUACUCCCGCUUCGGCGGGUGGGGAUAACACCUGACGAAAAGGCGAUGUUAGACACGCCAAGGUCAUAAUCCCCGGAGCUUCGGCUCC";
 
 var showCopiesText = false;
 var showStrandText = false;
@@ -15,6 +103,14 @@ function addBase(){
 		document.getElementById("state").innerHTML = "You are a strand of RNA.";
 		document.getElementById("strandText").style.display="block";
 	};
+	
+	if (strand.length < round18.length) {
+		strand += round18.charAt(strand.length);
+		if (strand.length == round18.length) {
+			round18Created();
+		};
+	};
+	/*
 	if (strand.length == 2) {
 		showRibozymeText = true;
 		document.getElementById("ribozymeText").style.display="block";
@@ -30,7 +126,12 @@ function addBase(){
 	} else {
 		strand += "U";
 	};
+	
 	document.getElementById("strand").innerHTML = strand;
+};
+
+function round18Created() {
+	document.getElementById("round18Text").style.display="block";
 };
 
 function addRibozyme() {
@@ -64,18 +165,11 @@ function grow(){
 		document.getElementById("growthCost").innerHTML = growthCost;
 	};
 };
+*/
 
 function save(){
 	var save = {
-		copies: copies,
-		strand: strand,
-		growthCost: growthCost,
-		copyRate: copyRate,
-		ribozymeCost: ribozymeCost,
-		ribozymes: ribozymes,
-		showCopiesText: showCopiesText,
-		showStrandText: showStrandText,
-		showRibozymeText: showRibozymeText
+		seeds: seeds
 	};
 	localStorage.setItem("save",JSON.stringify(save));
 };
@@ -83,50 +177,11 @@ function save(){
 function load(){
 	var savegame = JSON.parse(localStorage.getItem("save"));
 	
-	if (typeof savegame.copies !== "undefined") copies = savegame.copies;
-	if (typeof savegame.strand !== "undefined") strand = savegame.strand;
-	if (typeof savegame.growthCost !== "undefined") growthCost = savegame.growthCost;
-	if (typeof savegame.copyRate !== "undefined") copyRate = savegame.copyRate;
-	if (typeof savegame.ribozymeCost !== "undefined") ribozymeCost = savegame.ribozymeCost;
-	if (typeof savegame.ribozymes !== "undefined") ribozymes = savegame.ribozymes;
-	if (typeof savegame.showCopiesText !== "undefined") showCopiesText = savegame.showCopiesText;
-	if (typeof savegame.showStrandText !== "undefined") showStrandText = savegame.showStrandText;
-	if (typeof savegame.showRibozymeText !== "undefined") showRibozymeText = savegame.showRibozymeText;
+	if (typeof savegame.seeds !== "undefined") seeds = savegame.seeds;
 	
-	document.getElementById("copies").innerHTML = copies;
-	document.getElementById("strand").innerHTML = strand;
-	document.getElementById("growthCost").innerHTML = growthCost;
-	document.getElementById("ribozymeCost").innerHTML = ribozymeCost;
-	document.getElementById("ribozymes").innerHTML = ribozymes;
-	
-	if (showCopiesText == false) {
-		document.getElementById("copiesText").style.display="none";
-		document.getElementById("growthText").style.display="none";
-	} else {
-		document.getElementById("copiesText").style.display="block";
-		document.getElementById("growthText").style.display="block";
-	};
-	if (showStrandText == false) {
-		document.getElementById("strandText").style.display="none";
-		document.getElementById("state").innerHTML = "You are a single nucleotide.";
-	} else {
-		document.getElementById("strandText").style.display="block";
-		document.getElementById("state").innerHTML = "You are a strand of RNA.";
-	};
-	if (showRibozymeText == false) {
-		document.getElementById("ribozymeText").style.display="none";
-	} else {
-		document.getElementById("ribozymeText").style.display="block";
-	};
-	
+	document.getElementById("seeds").innerHTML = seeds;	
 };
 
 function deleteSave(){
 	localStorage.removeItem("save");
 };
-
-window.setInterval(function(){
-	if (copyRate > 0) {
-		clicked(copyRate);
-	};
-}, 1000);

@@ -1,0 +1,19 @@
+.progress {
+  width: 40%;
+  background-color: grey;
+}
+
+.bar {
+  width: 1%;
+  height: 30px;
+  background-color: green;
+  color: white;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
