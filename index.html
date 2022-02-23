@@ -5,42 +5,23 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="An incremental game where a bird explores the world.">
 	<link rel="stylesheet" type="text/css" href="styles.css">
-	<title>A Bird Life</title>
+	<title>A Dragon's Life</title>
 </head>
 
 <body>
 
-<p id="state">You are a bird. You have <span id="seeds">0</span> seeds.</p>
+<p id="state">You are a dragon. You have <span id="sheep">0</span> sheep.</p>
 
 <div class="row">
-  <div class="column"><button type="button" onClick="startPecking()">Peck for seeds</button></div>
-  <div class="column"><div class="progress" id="seedProgress"><div class="bar" id="seedBar"></div></div></div>
+  <div class="column"><button type="button" onClick="startHunting()">Hunt sheep</button></div>
+  <div class="column"><div class="progress" id="huntProgress"><div class="bar" id="huntBar"></div></div></div>
 </div>
 <div class="row">
   <div class="column"><button type="button" onClick="startBuilding()">Build nest</button></div>
   <div class="column"><div class="progress" id="nestProgress"><div class="bar" id="nestBar"></div></div></div>
 </div>
-<span id="test">0</span>
-
-<!--
-<p id="strandText" style="display:none; word-wrap:break-word;">Your bases are <span id="strand"></span>.</p>
-<!--<button type="button" onClick="clicked(1)">Replicate</button> 
-<p id="copiesText" style="display:none">You have <span id="copies"></span> copies.</p>
-<p id="growthText" style="display:none"><button type="button" onClick="grow()">Grow</button> Requires <span id="growthCost">2</span> copies.</p>
-
-<p id="ribozymeText" style="display:none"><button type="button" onClick="addRibozyme()">Create ribozyme</button> 
-Costs <span id="ribozymeCost">3</span> copies. You have <span id="ribozymes">0</span> ribozymes.
-<br>Ribozymes replicate your RNA and create one additional copy per second.</p>
-
-<p id="round18Text" style="display:none">You created the a ribozyme! You can now replicate other RNAs.</p>
-<!--
-<p>You have clicked <span id="clicks">0</span> times.</p>
-<button type="button" onClick="clicked(1)">Click</button>
-<button type="button" onClick="automate()">Automate</button>
-<br>
-Automatics: <span id="automatics">0</span>
-Cost: <span id="autoCost">2</span>
--->
+<p id="tips"></p>
+<!--<span id="test">0</span>-->
 
 <br>
 <br>
