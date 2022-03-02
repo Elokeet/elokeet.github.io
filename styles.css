@@ -1,5 +1,5 @@
 .progress {
-  width: 40%;
+  width: 80%;
   background-color: grey;
 }
 
@@ -15,5 +15,5 @@
 }
 
 .column {
-  flex: 50%;
+  flex: 30%;
 }
