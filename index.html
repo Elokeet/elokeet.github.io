@@ -3,7 +3,7 @@
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="An incremental game where a bird explores the world.">
+	<meta name="description" content="An incremental game where a dragon explores the world.">
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<title>A Dragon's Life</title>
 </head>
@@ -26,6 +26,9 @@
 		<div class="column"><button type="button" onClick="startBuilding()">Build nest</button></div>
 		<div class="column">Building skill: <span id="buildLevel">0</span></div>
 		<div class="column"><div class="progress" id="nestProgress"><div class="bar" id="nestBar"></div></div></div>
+	</div>
+	<div class="row" id="mate" style="display:none">
+		<div class="column"><button type="button" onClick="mate()">Mate</button></div>
 	</div>
 	<p id="tips"></p>
 	<!--<span id="test">0</span>-->
