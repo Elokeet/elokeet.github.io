@@ -1,5 +1,0 @@
-add specific ribozymes
-
-add better cost increase formulas
-
-fix broken saves between versions
