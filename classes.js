@@ -24,8 +24,8 @@ class Skill {
             data.generationBonus);
     }
 
-    incExp() {
-        this.exp += 1;
+    incExp(bonus) {
+        this.exp += bonus;
         if (this.exp >= this.maxexp) {
             var extra = this.exp - this.maxexp;
             while (extra > 0) {
